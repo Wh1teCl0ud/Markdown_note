@@ -15,28 +15,30 @@
   - [Ordered](#ordered)
   - [List with checkboxes](#list-with-checkboxes)
 - [Table](#table)
-- [Toggle](#toggle)
+- [Toggle (dropdown)](#toggle-dropdown)
 
   <br>  <br>
 
 # Heading 1: `# text`
 ## Heading 2: `## text`
+Just like in HTML, headings are from h1 up to h6.
   <br>
 
 
 ## Code:
-- To highlight only a part of a sentence `as a code`, put it within a pair of single backticks:
+- To highlight only a part of a sentence `as a code`, put it within a pair of single backticks ( ` ):
 ```
 `code`
 ```
-- To have fenced multiline code, put it between two lines of triple backticks ` ``` `.
+- To have fenced multiline code, like below, put it between two lines of triple backticks ` ``` `.
 ```js 
 let numbers = [0, 1, 10, 2, 20, 3, 30];
 numbers.sort((a,b) => a - b);
 console.log(numbers);
 //[0, 1, 2, 3, 10, 20, 30]
 ```
-In the first line of two, straight after the backticks we can define a language of code to put its highlighting: ` ```js `
+In the first line of two, straight after the backticks we can define a language of code to put its highlighting, 
+like this: ` ```js `
   <br>  <br>
 
 ## Blockquote
@@ -77,13 +79,15 @@ And then we can use this handy shortcut this way:
 
 Let's look at multiple shortcut usage on the example:
 ```
+// shortcut creation
 [yt]: youtube.com "main page of YouTube"
 
+// fast shortcut usage
 [First YouTube mention][yt]
 [Second][yt]
 [Third][yt]
 ```
-And that's what we have:
+And that's what we get from code above:
 
 [yt]: youtube.com "main page of YouTube"
 
@@ -101,7 +105,7 @@ To paste an image with alt text:
 ```
 ![alt text](link to an image)
 ```
-And to make from whole image a link, we recurse the previous structure:
+And to make a link from a whole image, we recurse the previous structure:
 ```
 [ ![alt text](link to an image) ] (link)
 ```
@@ -194,13 +198,22 @@ That's what we have:
 
   <br>  <br>
 
-## Toggle
+## Toggle (dropdown)
 
 We can use some (mb all) HTML tags in markdown, just like toggle:
 <details>
-  <summary> Our cool toggle</summary>
+  <summary>Our cool toggle</summary>
   Some info inside of that toggle.
 </details>
+
+Which is:
+```
+<details>
+  <summary>Our cool toggle</summary>
+  Some info inside of that toggle.
+</details>
+
+```
 
 
 
