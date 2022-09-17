@@ -1,5 +1,5 @@
 
-  ## Contents of this markdown summary:
+## Contents of this markdown summary:
   
 - [Headings](#heading-1--text)
 - [Code highlighting](#code-snippet)
@@ -212,7 +212,6 @@ Which is:
   <summary>Our cool toggle</summary>
   Some info inside of that toggle.
 </details>
-
 ```
 
 
