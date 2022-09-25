@@ -1,5 +1,5 @@
 
-## Contents of this markdown summary:
+## Contents of this (short and personal) markdown summary:
   
 - [Headings](#heading-1--text)
 - [Code highlighting](#code-snippet)
