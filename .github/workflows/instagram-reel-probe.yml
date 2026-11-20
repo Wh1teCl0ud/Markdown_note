@@ -1,0 +1,19 @@
+name: Reel retrieval and transcript probe
+on:
+  push:
+    branches:
+      - temp/reel-probe-dfNb-20261120
+    paths:
+      - .github/workflows/instagram-reel-probe.yml
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up parser
+        run: python -m pip install -q requests pillow
+      - name: Retrieve Instagram reel, summarize frames and transcribe audio
+        run: python -u tools/instagram_reel_probe_20261120.py
