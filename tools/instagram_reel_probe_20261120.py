@@ -53,6 +53,10 @@ if not video_url:
        capture_output=True,text=True,timeout=100)
     print("YTDLP_CODE",p.returncode,"STDERR",p.stderr[-1500:],"STDOUT_HEAD",p.stdout[:600],flush=True)
     if p.returncode==0:
+        try:
+            meta=json.loads(p.stdout.splitlines()[0])
+            print("YTDLP_AUTHOR",meta.get("channel"),"YTDLP_DESCRIPTION",str(meta.get("description"))[:8000],"YTDLP_DURATION",meta.get("duration"),flush=True)
+        except Exception as e: print("META_PARSE_ERROR",str(e)[:100],flush=True)
         for f in os.listdir("."):
             if f.startswith("reel.") and f.endswith((".mp4",".mkv",".webm")):
                 os.rename(f,"reel.mp4")
@@ -101,7 +105,11 @@ try:
     if p.returncode==0:
         from faster_whisper import WhisperModel
         model=WhisperModel("base",device="cpu",compute_type="int8")
-        segments, info=model.transcribe("reel.mp4",beam_size=5,vad_filter=True)
+        import numpy as np
+        q=subprocess.run(["ffmpeg","-loglevel","error","-i","reel.mp4","-f","s16le","-acodec","pcm_s16le","-ac","1","-ar","16000","pipe:1"],capture_output=True,timeout=180)
+        if q.returncode or not q.stdout: raise RuntimeError("ffmpeg decoding failed: "+q.stderr.decode(errors="replace")[-300:])
+        audio=np.frombuffer(q.stdout,dtype=np.int16).astype(np.float32)/32768.0
+        segments, info=model.transcribe(audio,beam_size=5,vad_filter=True)
         print("ASR_LANG",info.language,info.language_probability,flush=True)
         print("TRANSCRIPT_BEGIN",flush=True)
         for seg in segments: print(f"[{seg.start:.1f}-{seg.end:.1f}] {seg.text}",flush=True)
